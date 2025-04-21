@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 import { db } from "@/lib/db";
@@ -40,11 +40,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       entityId: card.id,
       entityType: ENTITY_TYPE.CARD,
       action: ACTION.DELETE,
-    })
+    });
   } catch (error) {
     return {
-      error: "Failed to delete."
-    }
+      error: "Failed to delete.",
+    };
   }
 
   revalidatePath(`/board/${boardId}`);

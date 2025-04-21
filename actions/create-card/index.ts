@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
@@ -63,8 +63,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: "Failed to create."
-    }
+      error: "Failed to create.",
+    };
   }
 
   revalidatePath(`/board/${boardId}`);

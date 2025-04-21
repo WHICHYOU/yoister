@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { ENTITY_TYPE } from "@prisma/client";
 
@@ -31,4 +31,4 @@ export async function GET(
   } catch (error) {
     return new NextResponse("Internal Error", { status: 500 });
   }
-};
+}

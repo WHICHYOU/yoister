@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 import { db } from "@/lib/db";
@@ -58,11 +58,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       entityId: list.id,
       entityType: ENTITY_TYPE.LIST,
       action: ACTION.CREATE,
-    })
+    });
   } catch (error) {
     return {
-      error: "Failed to create."
-    }
+      error: "Failed to create.",
+    };
   }
 
   revalidatePath(`/board/${boardId}`);

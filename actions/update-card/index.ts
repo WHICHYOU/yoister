@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 import { db } from "@/lib/db";
@@ -43,11 +43,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       entityId: card.id,
       entityType: ENTITY_TYPE.CARD,
       action: ACTION.UPDATE,
-    })
+    });
   } catch (error) {
     return {
-      error: "Failed to update."
-    }
+      error: "Failed to update.",
+    };
   }
 
   revalidatePath(`/board/${boardId}`);

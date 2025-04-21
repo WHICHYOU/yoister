@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 import { db } from "@/lib/db";
@@ -22,7 +22,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   let lists;
 
   try {
-    const transaction = items.map((list) => 
+    const transaction = items.map((list) =>
       db.list.update({
         where: {
           id: list.id,
@@ -39,8 +39,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     lists = await db.$transaction(transaction);
   } catch (error) {
     return {
-      error: "Failed to reorder."
-    }
+      error: "Failed to reorder.",
+    };
   }
 
   revalidatePath(`/board/${boardId}`);
