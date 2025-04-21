@@ -1,8 +1,9 @@
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
 
 generator client {
   provider = "prisma-client-js"
@@ -13,10 +14,10 @@ model Board {
   orgId         String
   title         String
   imageId       String
-  imageThumbUrl String @db.Text
-  imageFullUrl  String @db.Text
-  imageUserName String @db.Text
-  imageLinkHTML String @db.Text
+  imageThumbUrl String 
+  imageFullUrl  String 
+  imageUserName String 
+  imageLinkHTML String 
 
   lists         List[]
 
@@ -44,7 +45,7 @@ model Card {
   id          String @id @default(uuid())
   title       String
   order       Int
-  description String? @db.Text
+  description String? 
 
   listId      String
   list        List  @relation(fields: [listId], references: [id], onDelete: Cascade)
@@ -75,8 +76,8 @@ model AuditLog {
   entityType  ENTITY_TYPE
   entityTitle String
   userId      String
-  userImage   String @db.Text
-  userName    String @db.Text
+  userImage   String 
+  userName    String 
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime  @updatedAt
